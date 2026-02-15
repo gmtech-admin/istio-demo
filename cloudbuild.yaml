@@ -14,12 +14,12 @@ steps:
     args:
       [
         'push',
-        'europe-west2-docker.pkg.dev/gmtech-bld-001/gmtech-admin-istio-demo/hostname-app:${_VERSION}'
+        'europe-west2-docker.pkg.dev/gmtech-bld-001/docker-wif-demo/hostname-app:${_VERSION}'
       ]
 
 # Optional but recommended: Cloud Build records the image as an artifact
 images:
-  - 'europe-west2-docker.pkg.dev/gmtech-bld-001/gmtech-admin-istio-demo/hostname-app:${_VERSION}'
+  - 'europe-west2-docker.pkg.dev/gmtech-bld-001/docker-wif-demo/hostname-app:${_VERSION}'
 
 options:
   logging: CLOUD_LOGGING_ONLY
