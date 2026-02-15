@@ -1,0 +1,15 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hostname-app"
+version = "0.1.0"
+description = "Simple app that prints hostname and version"
+requires-python = ">=3.11"
+dependencies = [
+    "flask"
+]
+
+[tool.hatch.build]
+packages = ["src"]

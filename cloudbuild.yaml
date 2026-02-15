@@ -1,0 +1,22 @@
+steps:
+  # Step 1: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'europe-west2-docker.pkg.dev/gmtech-bld-001/docker-wif-demo/hostname-app:${_VERSION}',
+        '.'
+      ]
+
+  # Step 2: Push the image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'europe-west2-docker.pkg.dev/gmtech-bld-001/docker-wif-demo/hostname-app:${_VERSION}'
+      ]
+
+# Optional but recommended: Cloud Build records the image as an artifact
+images:
+  - 'europe-west2-docker.pkg.dev/gmtech-bld-001/docker-wif-demo/hostname-app:${_VERSION}'
