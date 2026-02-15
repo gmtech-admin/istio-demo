@@ -5,7 +5,7 @@ steps:
       [
         'build',
         '-t',
-        'europe-west2-docker.pkg.dev/gmtech-bld-001/docker-wif-demo/hostname-app:${_VERSION}',
+        'europe-west2-docker.pkg.dev/gmtech-bld-001/docker_gar_repo/hostname-app:${_VERSION}',
         '.'
       ]
 
@@ -14,12 +14,12 @@ steps:
     args:
       [
         'push',
-        'europe-west2-docker.pkg.dev/gmtech-bld-001/docker-wif-demo/hostname-app:${_VERSION}'
+        'europe-west2-docker.pkg.dev/gmtech-bld-001/docker_gar_repo/hostname-app:${_VERSION}'
       ]
 
 # Optional but recommended: Cloud Build records the image as an artifact
 images:
-  - 'europe-west2-docker.pkg.dev/gmtech-bld-001/docker-wif-demo/hostname-app:${_VERSION}'
+  - 'europe-west2-docker.pkg.dev/gmtech-bld-001/docker_gar_repo/hostname-app:${_VERSION}'
 
 options: 
   logging: NONE
