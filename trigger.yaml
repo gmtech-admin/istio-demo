@@ -1,0 +1,21 @@
+apiVersion: cloudbuild.googleapis.com/v1
+kind: BuildTrigger
+metadata:
+  name: istio-demo-trigger
+description: "Trigger to build and push hostname-app image to GAR"
+filename: cloudbuild.yaml
+
+github:
+  owner: gmtech-admin
+  name: istio-demo
+  push:
+    branch: main
+
+build:
+  service_account: "projects/gmtech-bld-001/serviceAccounts/terraform-ci@gmtech-bld-001.iam.gserviceaccount.com"
+  substitutions:
+    _VERSION: "latest"
+
+options:
+  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
+  logging: CLOUD_LOGGING_ONLY
