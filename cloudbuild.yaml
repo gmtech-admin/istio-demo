@@ -21,4 +21,4 @@ steps:
 images:
   - 'europe-west2-docker.pkg.dev/gmtech-bld-001/gmtech-admin-istio-demo/hostname-app:${_VERSION}'
 options: 
-  logging: NONE
+  logging: CLOUD_LOGGING_ONLY
