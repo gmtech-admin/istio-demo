@@ -16,4 +16,4 @@ COPY src/ src/
 
 EXPOSE 8080
 
-CMD ["python", "src/app.py"]
+CMD ["python", "src/hostname_app/app.py"]

@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: istio-demo
+  name: hostname-app-1
+  labels:
+    app: hostname-app
+    version: "1"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hostname-app
+  template:
+    metadata:
+      namespace: istio-demo
+      labels:
+        app: hostname-app
+        version: "1"
+    spec:
+      containers:
+        - name: hostname-app
+          image: europe-west2-docker.pkg.dev/gmtech-bld-001/docker-wif-demo/hostname-app:1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: istio-demo
+  name: hostname-app-2
+  labels:
+    app: hostname-app
+    version: "2"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hostname-app
+  template:
+    metadata:
+      namespace: istio-demo
+      labels:
+        app: hostname-app
+        version: "2"
+    spec:
+      containers:
+        - name: hostname-app
+          image: europe-west2-docker.pkg.dev/gmtech-bld-001/docker-wif-demo/hostname-app:2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hostname-app
+  namespace: istio-demo
+  labels:
+    app: hostname-app
+spec:
+  type: ClusterIP
+  selector:
+    app: hostname-app
+  ports:
+    - port: 80
+      targetPort: 8080
