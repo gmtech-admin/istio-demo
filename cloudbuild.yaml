@@ -61,9 +61,7 @@ options:
   logging: CLOUD_LOGGING_ONLY
   automapSubstitutions: true
   env:
-    - _VERSION
-    - _REGION=europe-west2
-    - VERSION
+    - VER
 
 images:
   - europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/coldstore:${_VERSION}
