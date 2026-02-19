@@ -42,21 +42,6 @@ steps:
         source /workspace/version.env
         docker push europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/coldstore:1
 
-  # -----------------------------
-  # 4. Deploy to Cloud Run (optional)
-  # -----------------------------
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    id: "deploy"
-    entrypoint: bash
-    args:
-      - "-c"
-      - |
-        source /workspace/version.env
-        gcloud run deploy myapp \
-          --image gcr.io/$PROJECT_ID/myapp:${_VERSION} \
-          --region europe-west2 \
-          --platform managed
-
 options:
   logging: CLOUD_LOGGING_ONLY
   automapSubstitutions: true
