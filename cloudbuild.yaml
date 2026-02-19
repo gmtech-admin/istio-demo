@@ -9,14 +9,14 @@ steps:
       - "-c"
       - |
         pip install toml
-        VERSION=$(python3 - <<EOF
+        VERSION=$$(python3 - <<EOF
         import toml
         data = toml.load("pyproject.toml")
         print(data["project"]["version"])
         EOF
         )
-        echo "Detected version: $VERSION"
-        echo "_VERSION=$VERSION" > /workspace/version.env
+        echo "Detected version: $$VERSION"
+        echo "_VERSION=$$VERSION" > /workspace/version.env
 
   # -----------------------------
   # 2. Build Docker image using version
@@ -57,9 +57,6 @@ steps:
           --region europe-west2 \
           --platform managed
 
-# -----------------------------
-# Make version available to all steps...
-# -----------------------------
 options:
   logging: CLOUD_LOGGING_ONLY
 
