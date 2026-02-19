@@ -63,6 +63,7 @@ options:
   env:
     - _VERSION
     - _REGION=europe-west2
+    - VERSION
 
 images:
   - europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/coldstore:${_VERSION}
