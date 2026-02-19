@@ -58,7 +58,7 @@ steps:
           --platform managed
 
 # -----------------------------
-# Make version available to all steps
+# Make version available to all steps...
 # -----------------------------
 options:
   env:
