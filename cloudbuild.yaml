@@ -9,14 +9,14 @@ steps:
       - "-c"
       - |
         pip install toml
-        VER=$(python3 - <<EOF
+        _VER=$(python3 - <<EOF
         import toml
         data = toml.load("pyproject.toml")
         print(data["project"]["version"])
         EOF
         )
-        echo "Detected version: ${VER}"
-        echo "_VERSION=${VER}" > /workspace/version.env
+        echo "Detected version: ${_ VER}"
+        echo "_VERSION=${_VER}" > /workspace/version.env
 
   # -----------------------------
   # 2. Build Docker image using version
