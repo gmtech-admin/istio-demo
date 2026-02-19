@@ -15,8 +15,8 @@ steps:
         print(data["project"]["version"])
         EOF
         )
-        echo "Detected version: $$VERSION"
-        echo "_VERSION=$VERSION" > /workspace/version.env
+        echo "Detected version: $VERSION"
+        echo "_VERSION=${VERSION}" > /workspace/version.env
 
   # -----------------------------
   # 2. Build Docker image using version
@@ -62,6 +62,7 @@ options:
   automapSubstitutions: true
   env:
     - _VERSION
+    - _REGION=europe-west2
 
 images:
   - europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/coldstore:${_VERSION}
