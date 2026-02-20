@@ -13,6 +13,7 @@ steps:
         import toml
         data = toml.load("pyproject.toml")
         print(data["project"]["version"])
+        print('toml version',_VER)
         EOF
         )
         echo "Detected version: ${_VER}"
