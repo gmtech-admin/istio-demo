@@ -12,7 +12,7 @@ steps:
         _VER=$(python3 - <<EOF
         import toml
         data = toml.load("pyproject.toml")
-        print(data["project"]["version"])
+        print("VERSION:", data["project"]["version"])
         EOF
         )
         print("toml version.", _VER)
