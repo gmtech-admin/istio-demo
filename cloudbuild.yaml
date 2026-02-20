@@ -18,6 +18,7 @@ steps:
         EOF
         )
         echo "IMAGE=${version}" > /workspace/image.env
+        echo "IMAGE=${version}"
        
 
   # -----------------------------
