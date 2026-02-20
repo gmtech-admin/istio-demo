@@ -15,9 +15,8 @@ steps:
             data = yaml.safe_load(f)
             version = data["image"]["version"]
             print(version)
-            echo "IMAGE=${version}" > /workspace/image.env
         EOF
-        )
+        echo "IMAGE=${version}" > /workspace/image.env
        
 
   # -----------------------------
