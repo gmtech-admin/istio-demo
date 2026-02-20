@@ -13,7 +13,7 @@ steps:
         import yaml
         with open("manifest.yaml") as f:
             data = yaml.safe_load(f)
-           echo "IMAGE=${data["image"]["version"]}" > /workspace/image.env
+            echo "IMAGE=${data["image"]["version"]}" > /workspace/image.env
         EOF
         )
        
