@@ -16,6 +16,7 @@ steps:
             version = data["image"]["version"]
             print(version)
         EOF
+        )
         echo "IMAGE=${version}" > /workspace/image.env
        
 
