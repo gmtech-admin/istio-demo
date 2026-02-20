@@ -9,15 +9,15 @@ steps:
       - "-c"
       - |
         pip install pyyaml
-        IMG=$(python3 - <<'EOF'
+        _IMG=$(python3 - <<'EOF'
         import yaml
         with open("manifest.yaml") as f:
             data = yaml.safe_load(f)
         data["image"]["version"]
         EOF
         )
-        echo "IMAGE=${IMG}"
-        echo "IMAGE=${IMG}" > /workspace/image.env
+        echo "IMAGE=${_IMG}"
+        echo "IMAGE=${_IMG}" > /workspace/image.env
 
   # -----------------------------
   # 2. Build Docker image using version
