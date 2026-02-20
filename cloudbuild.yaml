@@ -1,6 +1,6 @@
 steps:
   # -----------------------------
-  # 1. Read version from pyproject.toml....
+  # 1. Read version from pyproject.toml.....
   # -----------------------------
   - name: python:3.11
     id: "read-version"
@@ -13,9 +13,9 @@ steps:
         import toml
         data = toml.load("pyproject.toml")
         print(data["project"]["version"])
-        print('toml version',_VER)
         EOF
         )
+        print('toml version.',_VER)
         echo "Detected version: ${_VER}"
         echo "_VERSION=${_VER}" > /workspace/version.env
 
