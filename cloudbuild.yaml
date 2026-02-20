@@ -15,7 +15,6 @@ steps:
         print("VERSION:", data["project"]["version"])
         EOF
         )
-        print("toml version.", _VER)
         echo "Detected version: ${_VER}"
         echo "_VERSION=${_VER}" > /workspace/version.env
 
