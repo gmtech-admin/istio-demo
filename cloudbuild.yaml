@@ -19,8 +19,7 @@ steps:
         )
         echo "IMAGE=${_IMG}" > /workspace/image.env
         echo "IMAGE=${_IMG}"
-       
-
+        
   # -----------------------------
   # 2. Build Docker image using version
   # -----------------------------
