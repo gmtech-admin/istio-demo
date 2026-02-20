@@ -15,7 +15,7 @@ steps:
         print(data["project"]["version"])
         EOF
         )
-        echo "Detected version: ${_ VER}"
+        echo "Detected version: ${_VER}"
         echo "_VERSION=${_VER}" > /workspace/version.env
 
   # -----------------------------
