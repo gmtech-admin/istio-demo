@@ -3,20 +3,21 @@ steps:
   # 1. Read version from pyproject.toml.....
   # -----------------------------
   - name: python:3.11
-    id: "read-version"
+    id: read-image-version
     entrypoint: bash
     args:
       - "-c"
       - |
-        pip install toml
-        _VER=$(python3 - <<EOF
-        import toml
-        data = toml.load("pyproject.toml")
-        echo "VERSION ${data["project"]["version"]}"
+        pip install pyyaml
+        IMG=$(python3 - <<'EOF'
+        import yaml
+        with open("manifest.yaml") as f:
+            data = yaml.safe_load(f)
+        data["image"]["version"]
         EOF
         )
-        echo "Detected version: ${_VER}"
-        echo "_VERSION=${_VER}" > /workspace/version.env
+        echo "IMAGE=${IMG}"
+        echo "IMAGE=${IMG}" > /workspace/image.env
 
   # -----------------------------
   # 2. Build Docker image using version
