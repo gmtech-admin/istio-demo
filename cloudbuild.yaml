@@ -17,8 +17,8 @@ steps:
             print(version)
         EOF
         )
-        echo "IMAGE=${version}" > /workspace/image.env
-        echo "IMAGE=${version}"
+        echo "IMAGE=${_IMG}" > /workspace/image.env
+        echo "IMAGE=${_IMG}"
        
 
   # -----------------------------
