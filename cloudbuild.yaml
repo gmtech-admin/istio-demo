@@ -1,6 +1,6 @@
 steps:
   # -----------------------------
-  # 1. Read version from pyproject.toml
+  # 1. Read version from pyproject.toml....
   # -----------------------------
   - name: python:3.11
     id: "read-version"
