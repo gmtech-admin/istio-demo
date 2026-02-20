@@ -13,11 +13,10 @@ steps:
         import yaml
         with open("manifest.yaml") as f:
             data = yaml.safe_load(f)
-        data
+           echo "IMAGE=${data["image"]["version"]}" > /workspace/image.env
         EOF
         )
-        echo "IMAGE=${_IMG}"
-        echo "IMAGE=${_IMG}" > /workspace/image.env
+       
 
   # -----------------------------
   # 2. Build Docker image using version
