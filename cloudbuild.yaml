@@ -1,6 +1,6 @@
 steps:
   # -----------------------------
-  # 1. Read version from pyproject.toml.....
+  # 1. Read version from manifest.yaml
   # -----------------------------
   - name: python:3.11
     id: read-image-version
@@ -9,46 +9,46 @@ steps:
       - "-c"
       - |
         pip install pyyaml
-        _IMG=$(python3 - <<'EOF'
+        VERSION=$(python3 - <<'EOF'
         import yaml
         with open("manifest.yaml") as f:
             data = yaml.safe_load(f)
-            version = data["image"]["version"]
-            print(version)
+        print(data["image"]["version"])
         EOF
-        )
-        echo "IMAGE=${_IMG}" > /workspace/image.env
-        echo "IMAGE=${_IMG}"
-        
+                )
+                echo "VERSION=${VERSION}" > /workspace/image.env
+                echo "Detected version: ${VERSION}"
+
   # -----------------------------
   # 2. Build Docker image using version
   # -----------------------------
   - name: gcr.io/cloud-builders/docker
-    id: "build-image"
+    id: build-image
     entrypoint: bash
     args:
       - "-c"
       - |
-        source /workspace/version.env
-        docker build -t europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/coldstore:1 .
+        source /workspace/image.env
+        IMAGE="europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo:${VERSION}"
+        echo "Building image: $IMAGE"
+        docker build -t "$IMAGE" .
 
   # -----------------------------
   # 3. Push image
   # -----------------------------
   - name: gcr.io/cloud-builders/docker
-    id: "push-image"
+    id: push-image
     entrypoint: bash
     args:
       - "-c"
       - |
-        source /workspace/version.env
-        docker push europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/coldstore:1
+        source /workspace/image.env
+        IMAGE="europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo:${VERSION}"
+        echo "Pushing image: $IMAGE"
+        docker push "$IMAGE"
 
 options:
   logging: CLOUD_LOGGING_ONLY
-  automapSubstitutions: true
-  env:
-    - _VERSION="1.0.0"  # Default version if pyproject.toml is not found
 
 images:
-  - europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/coldstore:1
+  - europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo
