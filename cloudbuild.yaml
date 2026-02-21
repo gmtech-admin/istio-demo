@@ -4,10 +4,12 @@ steps:
   # -----------------------------
   - name: gcr.io/cloud-builders/docker
     id: build-image
-    script: |
-      #!/bin/sh
-      set -e
-      docker build -t $_IMAGE .
+    args:
+      [
+        'build',
+        '-t', $_IMAGE,
+        '.'
+      ]
   # -----------------------------
   # 2. Push image
   # -----------------------------
@@ -20,6 +22,6 @@ steps:
 options:
   logging: CLOUD_LOGGING_ONLY
 substitutions:
-  _IMAGE: "europe-west2-docker.pkg.dev/${PROJECT_ID}/docker-wif-demo/bookinfo:$TAG_NAME"
+  _IMAGE: "europe-west2-docker.pkg.dev/${PROJECT_ID}/docker-wif-demo/bookinfo:${TAG_NAME}"
 images:
   - $_IMAGE
