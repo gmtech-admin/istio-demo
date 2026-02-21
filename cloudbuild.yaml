@@ -5,31 +5,24 @@ steps:
   # -----------------------------
   - name: gcr.io/cloud-builders/docker
     id: build-image
-    entrypoint: bash
-    args:
-      - "-c"
-      - |
-        source /workspace/image.env
-        IMAGE="europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo:$TAG_NAME"
-        echo "Building image: $IMAGE"
-        docker build -t "$IMAGE" .
+    script: |
+      #!/bin/sh
+      set -e
+      docker build -t $_IMAGE .
 
   # -----------------------------
   # 2. Push image
   # -----------------------------
   - name: gcr.io/cloud-builders/docker
     id: push-image
-    entrypoint: bash
-    args:
-      - "-c"
-      - |
-        source /workspace/image.env
-        IMAGE="europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo:$TAG_NAME"
-        echo "Pushing image: $IMAGE"
-        docker push "$IMAGE"
-
+    script: |
+      #!/bin/sh
+      set -e
+      docker push $_IMAGE
 options:
   logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _IMAGE: "europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo:$TAG_NAME"
 
 images:
-  - europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo:$TAG_NAME
+  - $_IMAGE
