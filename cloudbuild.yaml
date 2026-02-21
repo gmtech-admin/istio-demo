@@ -15,10 +15,11 @@ steps:
   # -----------------------------
   - name: gcr.io/cloud-builders/docker
     id: push-image
-    script: |
-      #!/bin/sh
-      set -e
-      docker push $_IMAGE
+    args:
+      [
+        'push',
+        $_IMAGE
+      ]
 options:
   logging: CLOUD_LOGGING_ONLY
   automapSubstitutions: false
