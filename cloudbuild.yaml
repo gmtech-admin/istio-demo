@@ -23,6 +23,6 @@ options:
   logging: CLOUD_LOGGING_ONLY
   automapSubstitutions: false
 substitutions:
-  _IMAGE: "europe-west2-docker.pkg.dev/${PROJECT_ID}/docker-wif-demo/bookinfo:1.0.0"
+  _IMAGE: "europe-west2-docker.pkg.dev/${PROJECT_ID}/docker-wif-demo/bookinfo:${TAG_NAME}"
 images:
   - $_IMAGE
