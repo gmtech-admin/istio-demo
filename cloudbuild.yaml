@@ -21,7 +21,7 @@ steps:
       docker push $_IMAGE
 options:
   logging: CLOUD_LOGGING_ONLY
-  automapSubstitutions: true
+  automapSubstitutions: false
 substitutions:
   _IMAGE: "europe-west2-docker.pkg.dev/${PROJECT_ID}/docker-wif-demo/bookinfo:1.0.0"
 images:
