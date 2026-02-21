@@ -1,7 +1,7 @@
 steps:
-  # -----------------------------
+  # ----------------------------------
   # 1. Build Docker image using version
-  # -----------------------------
+  # ----------------------------------
   - name: gcr.io/cloud-builders/docker
     id: build-image
     args:
@@ -11,7 +11,7 @@ steps:
         '.'
       ]
   # -----------------------------
-  # 2. Push image
+  # 2. Push image.
   # -----------------------------
   - name: gcr.io/cloud-builders/docker
     id: push-image
