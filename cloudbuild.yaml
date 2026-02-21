@@ -16,8 +16,8 @@ steps:
         print(data["image"]["version"])
         EOF
                 )
-                echo "VERSION=${VERSION}" > /workspace/image.env
-                echo "Detected version: ${VERSION}"
+                echo "VERSION=$VERSION" > /workspace/image.env
+                echo "Detected version: $VERSION"
 
   # -----------------------------
   # 2. Build Docker image using version
