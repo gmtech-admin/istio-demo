@@ -1,26 +1,7 @@
 steps:
-  # -----------------------------
-  # 1. Read version from manifest.yaml
-  # -----------------------------
-  - name: python:3.11
-    id: read-image-version
-    entrypoint: bash
-    args:
-      - "-c"
-      - |
-        pip install pyyaml
-        VERSION=$(python3 - <<'EOF'
-        import yaml
-        with open("manifest.yaml") as f:
-            data = yaml.safe_load(f)
-        print(data["image"]["version"])
-        EOF
-                )
-                echo "VERSION=$VERSION" > /workspace/image.env
-                echo "Detected version: $VERSION"
 
   # -----------------------------
-  # 2. Build Docker image using version
+  # 1. Build Docker image using version
   # -----------------------------
   - name: gcr.io/cloud-builders/docker
     id: build-image
@@ -29,12 +10,12 @@ steps:
       - "-c"
       - |
         source /workspace/image.env
-        IMAGE="europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo:${VERSION}"
+        IMAGE="europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo:$TAG_NAME"
         echo "Building image: $IMAGE"
         docker build -t "$IMAGE" .
 
   # -----------------------------
-  # 3. Push image
+  # 2. Push image
   # -----------------------------
   - name: gcr.io/cloud-builders/docker
     id: push-image
@@ -43,7 +24,7 @@ steps:
       - "-c"
       - |
         source /workspace/image.env
-        IMAGE="europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo:${VERSION}"
+        IMAGE="europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo:$TAG_NAME"
         echo "Pushing image: $IMAGE"
         docker push "$IMAGE"
 
@@ -51,4 +32,4 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 images:
-  - europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo
+  - europe-west2-docker.pkg.dev/$PROJECT_ID/docker-wif-demo/bookinfo:$TAG_NAME
