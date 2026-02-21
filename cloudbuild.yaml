@@ -20,6 +20,6 @@ steps:
 options:
   logging: CLOUD_LOGGING_ONLY
 substitutions:
-  _IMAGE: 'europe-west2-docker.pkg.dev/${PROJECT_ID}/docker-wif-demo/bookinfo:${TAG_NAME}'
+  _IMAGE: 'europe-west2-docker.pkg.dev/${PROJECT_ID}/docker-wif-demo/bookinfo:$TAG_NAME'
 images:
   - $_IMAGE
