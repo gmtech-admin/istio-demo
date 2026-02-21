@@ -1,5 +1,4 @@
 steps:
-
   # -----------------------------
   # 1. Build Docker image using version
   # -----------------------------
@@ -8,8 +7,7 @@ steps:
     script: |
       #!/bin/sh
       set -e
-      docker build -t $_IMAGE .
-
+      docker build -t ${_IMAGE} .
   # -----------------------------
   # 2. Push image
   # -----------------------------
@@ -18,11 +16,10 @@ steps:
     script: |
       #!/bin/sh
       set -e
-      docker push $_IMAGE
+      docker push ${_IMAGE}
 options:
   logging: CLOUD_LOGGING_ONLY
 substitutions:
   _IMAGE: "europe-west2-docker.pkg.dev/${PROJECT_ID}/docker-wif-demo/bookinfo:${TAG_NAME}"
-
 images:
-  - $_IMAGE
+  - ${_IMAGE}
